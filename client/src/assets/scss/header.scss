@@ -1,0 +1,47 @@
+.header {
+  font-size: 2rem;
+  padding: 20px 0;
+  background-color: $background-color;
+  &-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &-title {
+    color: $text-color;
+    display: flexbox;
+    font-size: xx-large;
+    &__first {
+      font-weight: 500;
+    }
+    &__second {
+      font-weight: 700;
+    }
+  }
+  &-form {
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    padding: 10px;
+    height: 100%;
+    background-color: lighten($background-color, 40%);
+  }
+  &-search {
+    border: none;
+    background: transparent;
+    &:focus {
+      outline: none;
+    }
+  }
+  &-list {
+    display: flex;
+    column-gap: 20px;
+
+    &__item {
+      color: $text-color;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

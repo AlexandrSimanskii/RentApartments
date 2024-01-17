@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 10px;
+}
+body {
+  font-size: 16px;
+}
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+
+$background-color: rgb(115, 115, 115);
+$text-color: #010101;
+// --second-text-color: #686868;
+// --color-active: #d74444;
+// --button-color: #245462;
+
+@import "header";
