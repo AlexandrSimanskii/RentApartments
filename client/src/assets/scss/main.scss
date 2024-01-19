@@ -7,6 +7,7 @@ html {
   font-size: 10px;
 }
 body {
+  background-color: rgb(241, 245, 241);
   font-size: 16px;
 }
 .container {
@@ -21,10 +22,9 @@ ul {
   list-style: none;
 }
 
-$background-color: rgb(115, 115, 115);
-$text-color: #010101;
-// --second-text-color: #686868;
-// --color-active: #d74444;
-// --button-color: #245462;
+$background-color: rgb(156, 155, 155);
+$text-color: #131313;
+$form-color: rgb(250, 56, 43);
 
 @import "header";
+@import "signUp";
