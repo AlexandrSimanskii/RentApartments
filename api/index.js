@@ -6,26 +6,24 @@ import signUpRouter from "./routes/auth.router.js";
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO)
+mongoose
+  .connect(process.env.MONGO)
   .then(() => {
     console.log("Connect with MongoDB");
   })
   .catch((err) => console.log("Не удалось подключиться к MongoDB", err));
 
 const api = express();
-
-
-
+ 
 api.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
 
-
 api.use(express.json());
-api.use("/users/get", userRoute);
+api.use("/users", userRoute);
 api.use("/api", signUpRouter);
 api.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
-  return res.status(statusCode).json({ succsess: false, statusCode, message });
+  return res.status(statusCode).json({ success: false, statusCode, message });
 });
