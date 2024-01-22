@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 export const signUp = async (req, res, next) => {
   const { username, email, password } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
-  const newUser = new User({ username, email,  password: hashedPassword });
+  const newUser = new User({ username, email, password: hashedPassword });
 
   try {
     await newUser.save();
@@ -33,10 +33,10 @@ export const signIn = async (req, res, next) => {
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validUser._doc;
     res
-      .cookie("access_tocen", token, { httpOnly: true })
+      .cookie("access_token", token, { httpOnly: true })
       .status(200)
       .json(rest);
   } catch (error) {
-    next(error); 
-  } 
+    next(error);
+  }
 };
