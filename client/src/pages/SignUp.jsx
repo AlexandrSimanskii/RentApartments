@@ -14,27 +14,28 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    if (!dataForm.password || !dataForm.email || !dataForm.username) {
+      setError("Заполните все поля");
+      setLoading(false);
+      return;
+    }
     try {
-      if (dataForm.email.length) {
-        const res = await fetch("/api/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataForm),
-        });
-        const data = await res.json();
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataForm),
+      });
+      const data = await res.json();
 
-        if (data.success === false) {
-          setError(data.message);
-          setLoading(false);
-          return;
-        }
+      if (data.success === false) {
+        setError(data.message);
         setLoading(false);
-        navigate("/signIn");
+        return;
       }
-      throw new Error("Заполните поля");
+      setLoading(false);
+      navigate("/signIn");
     } catch (err) {
       console.log(err);
       setError(err.message);
