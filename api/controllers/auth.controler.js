@@ -21,7 +21,6 @@ export const signUp = async (req, res, next) => {
 export const signIn = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    console.log(req.body);
     const validUser = await User.findOne({ email });
     if (!validUser) {
       return next(errorHandler(404, "Пользователь с такой почтой не найден"));
@@ -38,5 +37,36 @@ export const signIn = async (req, res, next) => {
       .json(rest);
   } catch (error) {
     next(error);
+  }
+};
+
+export const signInWithGoogle = async (req, res, next) => {
+  const { username, password, email } = req.body;
+  const validUser = await User.findOne({ email });
+
+  if (!validUser) {
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    const newUser = new User({ username, email, password: hashedPassword });
+
+    try {
+      await newUser.save();
+      res.status(201).json("User created successfully");
+    } catch (error) {
+      console.log(error);
+
+      next(error);
+    }
+  } else {
+    try {
+      const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
+      const validPassword = bcrypt.compareSync(password, validUser.password);
+      const { password: pass, ...rest } = validUser._doc;
+      res
+        .cookie("access_token", token, { httpOnly: true })
+        .status(200)
+        .json(rest);
+    } catch (error) {
+      next(error);
+    }
   }
 };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import OAuth from "../components/OAuth";
 import {
   signInStart,
   signInSuccess,
@@ -42,6 +43,7 @@ const SignIn = () => {
       } else {
         dispatch(signInSuccess(data));
         navigate("/");
+        // localStorage.setItem("user", JSON.stringify(data));
       }
     } catch (err) {
       dispatch(signInFailure(err.message));
@@ -65,9 +67,10 @@ const SignIn = () => {
           placeholder="Ваш пароль..."
           onChange={onChengeHeandler}
         />
-        <button className="signUp-button" disabled={loading}>
+        <button className="signUp-button" type="submit" disabled={loading}>
           {loading ? "Загрузка..." : "Войти"}
         </button>
+        <OAuth />
         <div className="signUp-bottom">
           <p>Нет аккаунта?</p>
           <Link to={"/signup"}>

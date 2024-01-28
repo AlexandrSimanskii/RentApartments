@@ -1,5 +1,5 @@
 .signUp {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
   color: $text-color;
   margin: 3rem;
   display: flex;
@@ -28,23 +28,33 @@
     }
   }
   &-button {
+    border: none;
     color: white;
     width: 100%;
     border-radius: 3px;
     padding: 7px;
     background-color: $btn-color;
-    font-size: 1.5rem;
+
+    transition: 0.2s;
+
     &:hover {
       opacity: 95%;
     }
-    &:disabled{
-      background-color: lighten($btn-color,10%);
+    &:disabled {
+      background-color: lighten($btn-color, 10%);
+    }
+    &:active {
+      background-color: darken($form-color, 50%);
+      transform: translateY(-2px);
+    }
+    &_google {
+      background-color: red;
     }
   }
   &-bottom {
     display: flex;
     column-gap: 1rem;
-    
+
     &__link {
       color: $form-color;
     }
