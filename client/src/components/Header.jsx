@@ -4,9 +4,11 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const { currentUser } = useSelector((state) => {
+    return state.user;
+  });
 
-    return state.user});
-  // console.log(currentUser);
+  console.log(currentUser);
+
   return (
     <header className="header">
       <div className="header-inner container">
@@ -19,6 +21,7 @@ const Header = () => {
 
         <form className="header-form">
           <input className="header-search" type="text" placeholder="Поиск..." />
+
           <FaSearch />
         </form>
         <ul className="header-list">
@@ -28,9 +31,22 @@ const Header = () => {
           <Link to={"/about"}>
             <li className="header-list__item">О нас</li>
           </Link>
-          <Link to={"/signIn"}>
-            <li className="header-list__item">Войти</li>
-          </Link>
+
+          {currentUser ? (
+            <Link to={"/profile"}>
+              <li className="header-list__item">
+                <img
+                  className="header-img"
+                  src={currentUser.photo}
+                  alt="profile"
+                />{" "}
+              </li>{" "}
+            </Link>
+          ) : (
+            <Link to={"/signIn"}>
+              <li className="header-list__item">Войти</li>
+            </Link>
+          )}
         </ul>
       </div>
     </header>

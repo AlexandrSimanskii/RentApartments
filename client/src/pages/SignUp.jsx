@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth"
 
 const SignUp = () => {
   const [dataForm, setDataForm] = useState({});
@@ -71,6 +72,7 @@ const SignUp = () => {
         <button className="signUp-button" disabled={loading}>
           {loading ? "Регистрация..." : "Зарегистрироваться"}
         </button>
+        <OAuth/>
         <div className="signUp-bottom">
           <p>Уже есть аккаунт?</p>
           <Link to={"/signIn"}>

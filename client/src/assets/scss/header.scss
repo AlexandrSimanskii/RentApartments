@@ -36,7 +36,7 @@
   &-list {
     display: flex;
     column-gap: 20px;
-   
+    align-items: center;
 
     &__item {
       color: $text-color;
@@ -44,6 +44,13 @@
         text-decoration: underline;
       }
     }
+  }
+  &-img {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+   
   }
 }
 
