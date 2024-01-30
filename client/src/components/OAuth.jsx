@@ -12,6 +12,7 @@ const OAuth = () => {
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
+
       const password =
         Math.random().toString().slice(-8) + Math.random().toString().slice(-8);
       const res = await fetch("/api/signwithgoogle", {
@@ -23,9 +24,11 @@ const OAuth = () => {
           password,
           username: result.user.displayName,
           email: result.user.email,
+          
         }),
       });
       const data = await res.json();
+      console.log(data);
       if (data.success === false) {
         dispatch(signInFailure(data.message));
       } else {

@@ -7,7 +7,7 @@ const Header = () => {
     return state.user;
   });
 
-  console.log(currentUser);
+
 
   return (
     <header className="header">
@@ -37,7 +37,7 @@ const Header = () => {
               <li className="header-list__item">
                 <img
                   className="header-img"
-                  src={currentUser.photo}
+                  src={currentUser?.avatar}
                   alt="profile"
                 />{" "}
               </li>{" "}

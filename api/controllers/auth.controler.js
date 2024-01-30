@@ -41,16 +41,16 @@ export const signIn = async (req, res, next) => {
 };
 
 export const signInWithGoogle = async (req, res, next) => {
-  const { username, password, email } = req.body;
+  const { username, password, email, } = req.body;
   const validUser = await User.findOne({ email });
-
+  const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
   if (!validUser) {
     const hashedPassword = bcrypt.hashSync(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({ username, email, password: hashedPassword, });
 
     try {
       await newUser.save();
-      res.status(201).json("User created successfully");
+      res.cookie("access_token", token, { httpOnly: true }).status(201).json(newUser);
     } catch (error) {
       console.log(error);
 
@@ -58,7 +58,7 @@ export const signInWithGoogle = async (req, res, next) => {
     }
   } else {
     try {
-      const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
+    
       const validPassword = bcrypt.compareSync(password, validUser.password);
       const { password: pass, ...rest } = validUser._doc;
       res
