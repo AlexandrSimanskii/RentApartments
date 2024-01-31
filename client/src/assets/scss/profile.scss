@@ -1,0 +1,26 @@
+.profile {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+  &-title {
+    font-size: xx-large;
+    font-weight: 700;
+  }
+  &-img {
+    border-radius: 50%;
+    max-width: 10rem;
+    object-fit: cover;
+  }
+  &-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    &__element {
+      border-radius: 4px;
+      padding: 7px;
+    }
+  }
+}
