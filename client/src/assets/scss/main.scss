@@ -15,22 +15,40 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
+$background-color: rgb(156, 155, 155);
+$text-color: #131313;
+$form-color: rgb(250, 56, 43);
+$btn-color: rgb(24, 81, 81);
 a {
   text-decoration: none;
 }
 ul {
   list-style: none;
 }
+
 button {
+  background-color: $btn-color;
   cursor: pointer;
+  border: none;
+  color: white;
+  width: 100%;
+  border-radius: 3px;
+  padding: 7px;
+  transition: 0.2s;
+
+  &:hover {
+    opacity: 95%;
+  }
+  &:disabled {
+    background-color: lighten($btn-color, 10%);
+  }
+  &:active {
+    background-color: darken($form-color, 50%);
+    transform: translateY(-2px);
+  }
 }
 
 
-
-$background-color: rgb(156, 155, 155);
-$text-color: #131313;
-$form-color: rgb(250, 56, 43);
-$btn-color: rgb(24, 81, 81);
 @import "header";
 @import "signUp";
 @import "profile";

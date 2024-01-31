@@ -14,11 +14,14 @@
     object-fit: cover;
   }
   &-form {
+    max-width: 500px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 10px;
     &__element {
+      width: 100%;
       border-radius: 4px;
       padding: 7px;
     }
