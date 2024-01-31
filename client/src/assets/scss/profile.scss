@@ -26,4 +26,12 @@
       padding: 7px;
     }
   }
+  &-upload {
+    &__success {
+      color: $btn-color;
+    }
+    &__error {
+      color: $form-color;
+    }
+  }
 }

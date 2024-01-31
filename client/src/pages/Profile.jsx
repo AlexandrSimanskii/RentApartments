@@ -15,9 +15,7 @@ const Profile = () => {
   const [formData, setFormData] = useState({});
   const { currentUser } = useSelector((state) => state.user);
   const fileRef = useRef(null);
-  console.log(formData);
-  console.log(errorFileApload);
-  console.log(fileProc);
+
 
   useEffect(() => {
     if (file) {
@@ -63,9 +61,22 @@ const Profile = () => {
       <img
         className="profile-img"
         onClick={() => fileRef.current.click()}
-        src={currentUser.avatar}
+        src={formData.avatar || currentUser.avatar}
         alt="profile"
       />
+      <p className="profile-upload">
+        {errorFileApload ? (
+          <span className="profile-upload__error">
+            Не удалось обновить картинку(картинка должна быть менее 2мб)
+          </span>
+        ) : fileProc > 0 && fileProc < 100 ? (
+          <span className="profile-upload__success">{`Загрузка ${fileProc}%`}</span>
+        ) : fileProc === 100 ? (
+          <span className="profile-upload__success">Обновление успешно!</span>
+        ) : (
+          ""
+        )}
+      </p>
       <form className="profile-form">
         <input
           type="file"
