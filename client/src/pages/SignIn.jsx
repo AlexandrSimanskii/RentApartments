@@ -43,7 +43,7 @@ const SignIn = () => {
       } else {
         dispatch(signInSuccess(data));
         navigate("/");
-        // localStorage.setItem("user", JSON.stringify(data));
+       
       }
     } catch (err) {
       dispatch(signInFailure(err.message));

@@ -15,7 +15,7 @@ const OAuth = () => {
 
       const password =
         Math.random().toString().slice(-8) + Math.random().toString().slice(-8);
-      const res = await fetch("/api/signwithgoogle", {
+      const res = await fetch("/api/googleAuth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

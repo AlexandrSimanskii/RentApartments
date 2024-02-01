@@ -2,10 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth"
 
+import { signInSuccess } from "../redux/users/userSlise";
+import { useDispatch } from "react-redux";
 const SignUp = () => {
   const [dataForm, setDataForm] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const onChengeHeandler = (e) => {
     const newData = { ...dataForm, [e.target.id]: e.target.value };
@@ -36,7 +39,8 @@ const SignUp = () => {
         return;
       }
       setLoading(false);
-      navigate("/signIn");
+      dispatch(signInSuccess(data));
+      navigate("/");
     } catch (err) {
       console.log(err);
       setError(err.message);
@@ -75,7 +79,7 @@ const SignUp = () => {
         <OAuth/>
         <div className="signUp-bottom">
           <p>Уже есть аккаунт?</p>
-          <Link to={"/signIn"}>
+          <Link to={"/sign-in"}>
             <span className="signUp-bottom__link">Войти</span>
           </Link>
         </div>
