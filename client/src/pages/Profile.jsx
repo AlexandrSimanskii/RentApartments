@@ -7,23 +7,31 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "../firebase";
+import { useDispatch } from "react-redux";
+import {
+  updateUserSuccess,
+  updateUserFailure,
+  updateUserStart,
+} from "../redux/users/userSlise.js";
 
 const Profile = () => {
   const [file, setFile] = useState(null);
   const [fileProc, setFileProc] = useState(0);
   const [errorFileApload, setErrorFileUpload] = useState(false);
   const [formData, setFormData] = useState({});
-  const { currentUser } = useSelector((state) => state.user);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
   const fileRef = useRef(null);
-
+  const dispatch = useDispatch();
+  console.log(error);
 
   useEffect(() => {
     if (file) {
-      handleFileUload(file);
+      handleFileUpload(file);
     }
   }, [file]);
 
-  const handleFileUload = (file) => {
+  const handleFileUpload = (file) => {
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
     const storageRef = ref(storage, fileName);
@@ -49,10 +57,42 @@ const Profile = () => {
     );
   };
 
+  const handleChenge = async (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(updateUserStart());
+
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+
+      if (data.success === false) {
+        dispatch(updateUserFailure(data.message));
+        console.log(data.message);
+        return;
+      }
+
+      dispatch(updateUserSuccess(data));
+      setUpdateSuccess(true);
+    } catch (error) {
+      dispatch(updateUserFailure(error.message));
+    }
+  };
+
   // firebase storage
   // allow read;
   // allow write: if
   // request.resource.size < 2 * 1024 * 1024 &&
+
   // request.resource.contentType.matches('image/.*')
   return (
     <div className="profile container">
@@ -77,7 +117,7 @@ const Profile = () => {
           ""
         )}
       </p>
-      <form className="profile-form">
+      <form className="profile-form" onSubmit={handleSubmit}>
         <input
           type="file"
           ref={fileRef}
@@ -87,26 +127,33 @@ const Profile = () => {
         />
         <input
           className="profile-form__element"
-          id="name"
+          id="username"
           type="text"
+          defaultValue={currentUser.username}
           placeholder="Имя"
+          onChange={handleChenge}
         />
         <input
           className="profile-form__element"
           id="email"
           type="email"
+          defaultValue={currentUser.email}
           placeholder="Email"
+          onChange={handleChenge}
         />
         <input
           className="profile-form__element"
           id="password"
           type="password"
           placeholder="Пароль"
+          onChange={handleChenge}
         />
         <button className="profile_btn" type="submit">
-          Изменить
+          {loading ? "Загрузка..." : "Обновить"}
         </button>
       </form>
+      <p>{error ? error : ""}</p>
+      <p>{updateSuccess ? "Данные изменены" : ""}</p>
     </div>
   );
 };
