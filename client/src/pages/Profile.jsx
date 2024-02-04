@@ -12,6 +12,9 @@ import {
   updateUserSuccess,
   updateUserFailure,
   updateUserStart,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
 } from "../redux/users/userSlise.js";
 
 const Profile = () => {
@@ -23,7 +26,7 @@ const Profile = () => {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const fileRef = useRef(null);
   const dispatch = useDispatch();
-  console.log(error);
+  console.log(currentUser._id);
 
   useEffect(() => {
     if (file) {
@@ -88,6 +91,25 @@ const Profile = () => {
     }
   };
 
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      console.log(currentUser);
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.error));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+      console.log(currentUser);
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
+
   // firebase storage
   // allow read;
   // allow write: if
@@ -96,64 +118,74 @@ const Profile = () => {
   // request.resource.contentType.matches('image/.*')
   return (
     <div className="profile container">
-      <h2 className="profile-title">Ваш профиль</h2>
+      <div className="profile-inner">
+        <h2 className="profile-title">Ваш профиль</h2>
 
-      <img
-        className="profile-img"
-        onClick={() => fileRef.current.click()}
-        src={formData.avatar || currentUser.avatar}
-        alt="profile"
-      />
-      <p className="profile-upload">
-        {errorFileApload ? (
-          <span className="profile-upload__error">
-            Не удалось обновить картинку(картинка должна быть менее 2мб)
+        <img
+          className="profile-img"
+          onClick={() => fileRef.current.click()}
+          src={formData.avatar || currentUser.avatar}
+          alt="profile"
+        />
+        <p className="profile-upload">
+          {errorFileApload ? (
+            <span className="profile-upload__error">
+              Не удалось обновить картинку(картинка должна быть менее 2мб)
+            </span>
+          ) : fileProc > 0 && fileProc < 100 ? (
+            <span className="profile-upload__success">{`Загрузка ${fileProc}%`}</span>
+          ) : fileProc === 100 ? (
+            <span className="profile-upload__success">Обновление успешно!</span>
+          ) : (
+            ""
+          )}
+        </p>
+        <form className="profile-form" onSubmit={handleSubmit}>
+          <input
+            type="file"
+            ref={fileRef}
+            onChange={(e) => setFile(e.target.files[0])}
+            hidden
+            accept="image/*"
+          />
+          <input
+            className="profile-form__element"
+            id="username"
+            type="text"
+            defaultValue={currentUser.username}
+            placeholder="Имя"
+            onChange={handleChenge}
+          />
+          <input
+            className="profile-form__element"
+            id="email"
+            type="email"
+            defaultValue={currentUser.email}
+            placeholder="Email"
+            onChange={handleChenge}
+          />
+          <input
+            className="profile-form__element"
+            id="password"
+            type="password"
+            placeholder="Пароль"
+            onChange={handleChenge}
+          />
+          <button className="profile_btn" type="submit">
+            {loading ? "Загрузка..." : "Изменить"}
+          </button>
+        </form>
+
+        <div className="account">
+          <span onClick={handleDeleteUser} className="account__delete">
+            Удалить аккаунт
           </span>
-        ) : fileProc > 0 && fileProc < 100 ? (
-          <span className="profile-upload__success">{`Загрузка ${fileProc}%`}</span>
-        ) : fileProc === 100 ? (
-          <span className="profile-upload__success">Обновление успешно!</span>
-        ) : (
-          ""
-        )}
-      </p>
-      <form className="profile-form" onSubmit={handleSubmit}>
-        <input
-          type="file"
-          ref={fileRef}
-          onChange={(e) => setFile(e.target.files[0])}
-          hidden
-          accept="image/*"
-        />
-        <input
-          className="profile-form__element"
-          id="username"
-          type="text"
-          defaultValue={currentUser.username}
-          placeholder="Имя"
-          onChange={handleChenge}
-        />
-        <input
-          className="profile-form__element"
-          id="email"
-          type="email"
-          defaultValue={currentUser.email}
-          placeholder="Email"
-          onChange={handleChenge}
-        />
-        <input
-          className="profile-form__element"
-          id="password"
-          type="password"
-          placeholder="Пароль"
-          onChange={handleChenge}
-        />
-        <button className="profile_btn" type="submit">
-          {loading ? "Загрузка..." : "Обновить"}
-        </button>
-      </form>
-      <p>{error ? error : ""}</p>
-      <p>{updateSuccess ? "Данные изменены" : ""}</p>
+          <span className="account__sign-out">Выйти из аккаунта</span>
+        </div>
+
+        <p>{error ? error : ""}</p>
+        <p>{updateSuccess ? "Данные изменены" : ""}</p>
+      </div>
     </div>
   );
 };
