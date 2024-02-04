@@ -15,6 +15,9 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
+  logOutUserFailure,
+  logOutUserSuccess,
+  logOutUserStart,
 } from "../redux/users/userSlise.js";
 
 const Profile = () => {
@@ -110,6 +113,22 @@ const Profile = () => {
     }
   };
 
+  const handleLogOut = async () => {
+    try {
+      dispatch(logOutUserStart());
+      const res = await fetch("/api/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(logOutUserFailure(data.message));
+        return;
+      }
+      dispatch(logOutUserSuccess());
+    } catch (error) {
+      
+      dispatch(logOutUserFailure(error.message));
+    }
+  };
+
   // firebase storage
   // allow read;
   // allow write: if
@@ -177,10 +196,12 @@ const Profile = () => {
         </form>
 
         <div className="account">
-          <span onClick={handleDeleteUser} className="account__delete">
+          <span className="account__delete" onClick={handleDeleteUser}>
             Удалить аккаунт
           </span>
-          <span className="account__sign-out">Выйти из аккаунта</span>
+          <span className="account__sign-out" onClick={handleLogOut}>
+            Выйти из аккаунта
+          </span>
         </div>
 
         <p>{error ? error : ""}</p>

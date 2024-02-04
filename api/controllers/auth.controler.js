@@ -17,8 +17,6 @@ export const signUp = async (req, res, next) => {
       .status(201)
       .json(rest);
   } catch (error) {
-    console.log(error);
-
     next(error);
   }
 };
@@ -83,5 +81,16 @@ export const signInWithGoogle = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
+  }
+};
+
+export const signOut = async (req, res, next) => {
+  try {
+    res
+      .clearCookie("access_token")
+      .status(200)
+      .json("Пользователь вышел с аккаунта");
+  } catch (error) {
+    next(error);
   }
 };
