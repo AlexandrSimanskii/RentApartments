@@ -15,7 +15,7 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
-$background-color: rgb(156, 155, 155);
+$background-color: rgba(160, 172, 181, 0.995);
 $text-color: #131313;
 $form-color: rgb(250, 56, 43);
 $btn-color: rgb(24, 81, 81);
@@ -47,8 +47,25 @@ button {
     transform: translateY(-2px);
   }
 }
-
+input,
+textarea {
+  border: 1.5px solid rgb(84, 81, 81);
+  font-size: 1.5rem;
+  border-radius: 3px;
+  padding: 7px;
+  outline: none;
+  &:focus {
+    border-color: $form-color;
+  }
+}
+textarea {
+  resize: none;
+}
+fieldset {
+  border: none;
+}
 
 @import "header";
 @import "signUp";
 @import "profile";
+@import "listing";

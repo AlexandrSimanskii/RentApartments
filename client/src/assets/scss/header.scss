@@ -27,6 +27,7 @@
     background-color: lighten($background-color, 40%);
   }
   &-search {
+    padding: 0;
     border: none;
     background: transparent;
     &:focus {

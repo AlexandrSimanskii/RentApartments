@@ -39,7 +39,7 @@ const Header = () => {
               </li>
             </Link>
           ) : (
-            <Link to={"/signIn"}>
+            <Link to={"/sign-in"}>
               <li className="header-list__item">Войти</li>
             </Link>
           )}

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
   getStorage,
@@ -124,7 +125,6 @@ const Profile = () => {
       }
       dispatch(logOutUserSuccess());
     } catch (error) {
-      
       dispatch(logOutUserFailure(error.message));
     }
   };
@@ -190,10 +190,13 @@ const Profile = () => {
             placeholder="Пароль"
             onChange={handleChenge}
           />
-          <button className="profile_btn" type="submit">
-            {loading ? "Загрузка..." : "Изменить"}
-          </button>
+          <button type="submit">{loading ? "Загрузка..." : "Изменить"}</button>
         </form>
+        <Link className="link" to={"/listing"}>
+          <button className="add-listing" type="button">
+            Добавить обьявление
+          </button>
+        </Link>
 
         <div className="account">
           <span className="account__delete" onClick={handleDeleteUser}>

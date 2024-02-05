@@ -16,16 +16,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 2rem;
-    &__item {
-      border: 1.5px solid rgb(84, 81, 81);
-      font-size: 1.5rem;
-      border-radius: 3px;
-      padding: 7px;
-      outline: none;
-      &:focus {
-        border-color: $form-color;
-      }
-    }
+  
   }
   &-button {
     background-color: $btn-color;
@@ -43,7 +34,7 @@
       transform: translateY(-2px);
     }
     &_google {
-      background-color: red;
+      background-color: $form-color;
     }
   }
   &-bottom {
