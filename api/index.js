@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import userRouter from "./routes/user.router.js";
 import authRouter from "./routes/auth.router.js";
+import listingRouter from "./routes/listing.router.js";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ api.use(express.json());
 
 api.use("/api", authRouter);
 api.use("/api/user", userRouter);
+api.use("/api/listing", listingRouter);
 api.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
