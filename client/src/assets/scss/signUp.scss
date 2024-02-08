@@ -16,19 +16,14 @@
     display: flex;
     flex-direction: column;
     row-gap: 2rem;
-  
   }
   &-button {
     background-color: $btn-color;
-
     transition: 0.2s;
-
     &:hover {
       opacity: 95%;
     }
-    &:disabled {
-      background-color: lighten($btn-color, 10%);
-    }
+   
     &:active {
       background-color: darken($form-color, 50%);
       transform: translateY(-2px);

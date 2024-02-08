@@ -190,7 +190,7 @@ const Profile = () => {
             placeholder="Пароль"
             onChange={handleChenge}
           />
-          <button type="submit">{loading ? "Загрузка..." : "Изменить"}</button>
+          <button className="profile-btn" type="submit">{loading ? "Загрузка..." : "Изменить"}</button>
         </form>
         <Link className="link" to={"/listing"}>
           <button className="add-listing" type="button">

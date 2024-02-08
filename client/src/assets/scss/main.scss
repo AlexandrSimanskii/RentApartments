@@ -31,7 +31,7 @@ button {
   cursor: pointer;
   border: none;
   color: white;
-  width: 100%;
+
   border-radius: 3px;
   padding: 7px;
   transition: 0.2s;
@@ -40,8 +40,11 @@ button {
     opacity: 95%;
   }
   &:disabled {
-    background-color: lighten($btn-color, 10%);
+    border: none;
+    opacity: 0.6;
+    cursor: not-allowed;
   }
+  
   &:active {
     background-color: darken($form-color, 50%);
     transform: translateY(-2px);

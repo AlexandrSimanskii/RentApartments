@@ -53,7 +53,7 @@ const listingSchema = new Scheme(
       require: true,
     },
     userRef: {
-      type: String, 
+      type: String,
       require: true,
     },
   },

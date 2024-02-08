@@ -39,6 +39,9 @@
       color: $form-color;
     }
   }
+  &-btn {
+    width: 100%;
+  }
 }
 .account {
   display: flex;
@@ -57,4 +60,9 @@
 }
 .add-listing {
   background-color: $form-color;
+  width: 100%;
+}
+.error {
+  color: red;
+  font-size: 20px;
 }
