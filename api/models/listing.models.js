@@ -6,55 +6,55 @@ const listingSchema = new Scheme(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     address: {
       type: String,
-      require: true,
+      required: true,
     },
     regularPrice: {
       type: Number,
-      require: true,
+      required: true,
     },
     discountPrice: {
       type: Number,
-      require: true,
+      required: true,
     },
     bathrooms: {
       type: Number,
-      require: true,
+      required: true,
     },
     bedrooms: {
       type: Number,
-      require: true,
+      required: true,
     },
     furnished: {
       type: Boolean,
-      require: true,
+      required: true,
     },
     parking: {
       type: Boolean,
-      require: true,
+      required: true,
     },
     type: {
       type: String,
-      require: true,
+      required: true,
     },
     offer: {
       type: Boolean,
-      require: true,
+      required: true,
     },
-    imageURL: {
+    imageUrls: {
       type: Array,
-      require: true,
+      required: true,
     },
     userRef: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   { timestamps: true }
