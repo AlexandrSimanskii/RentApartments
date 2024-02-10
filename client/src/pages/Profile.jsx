@@ -145,6 +145,21 @@ const Profile = () => {
       setErrorShowListings(error.message);
     }
   };
+  const handlerListingDelete = async (listingID) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingID}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        return data.message;
+      }
+      setListings((prev) => prev.filter((item) => item._id !== listingID));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   console.log(listings);
   // firebase storage
   // allow read;
@@ -232,9 +247,11 @@ const Profile = () => {
           Показать мои обьявления
         </button>
         <p> {errorShowListings ? "Ошибка при получении обьявлений" : ""}</p>
-        <div className="listing-cards">
-          {listings.length !== 0 &&
-            listings.map((item) => (
+
+        {listings.length !== 0 && (
+          <div className="listing-cards">
+            <h2 className="listing-cards__title">Ваши объявления</h2>
+            {listings.map((item) => (
               <div key={item._id} className="listing-card">
                 <Link to={`/listing/${item._id}`}>
                   <img
@@ -246,11 +263,17 @@ const Profile = () => {
                 <p>{item.name}</p>
                 <div className="listing-buttons">
                   <button className="listing-buttons__edit">Изменить</button>
-                  <button className="listing-buttons__delete">удалить</button>
+                  <button
+                    onClick={() => handlerListingDelete(item._id)}
+                    className="listing-buttons__delete"
+                  >
+                    удалить
+                  </button>
                 </div>
               </div>
             ))}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
