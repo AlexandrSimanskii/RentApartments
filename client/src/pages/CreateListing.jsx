@@ -9,7 +9,7 @@ import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const Listing = () => {
+const CreateListing = () => {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -355,4 +355,4 @@ const Listing = () => {
   );
 };
 
-export default Listing;
+export default CreateListing;

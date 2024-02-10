@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import User from "../models/user.models.js";
+import Listing from "../models/listing.models.js";
 import { errorHandler } from "../utils/error.js";
 
 export const test = (req, res) => {
@@ -9,7 +10,6 @@ export const test = (req, res) => {
 //req.user.id получаем из middlewear "verifyUser"
 
 export const updateUser = async (req, res, next) => {
-
   if (req.user.id !== req.params.id)
     return next(errorHandler(403, "Вы можете обновить только свой аккаунт!"));
 
@@ -48,5 +48,19 @@ export const deleteUser = async (req, res, next) => {
     res.status(200).json("Аккаунт удален");
   } catch (error) {
     next(error);
+  }
+};
+
+export const getUserListing = async (req, res, next) => {
+  if (req.user.id === req.params.id) {
+    console.log(req);
+    const listing = await Listing.find({ userRef: req.params.id });
+    res.status(200).json(listing)
+
+
+  } else {
+    return next(
+      errorHandler(401, "Вы можете посмотреть только свои обьявления!")
+    );
   }
 };

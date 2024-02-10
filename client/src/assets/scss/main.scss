@@ -15,10 +15,11 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
+$error-color: red;
 $background-color: rgba(160, 172, 181, 0.995);
 $text-color: #131313;
-$form-color: rgb(250, 56, 43);
-$btn-color: rgb(24, 81, 81);
+$form-color: rgb(27, 158, 33);
+$btn-color: rgb(0, 117, 255);
 a {
   text-decoration: none;
 }
@@ -31,7 +32,6 @@ button {
   cursor: pointer;
   border: none;
   color: white;
-
   border-radius: 3px;
   padding: 7px;
   transition: 0.2s;
@@ -45,9 +45,9 @@ button {
     opacity: 0.6;
     cursor: not-allowed;
   }
-  
+
   &:active {
-    background-color: darken($form-color, 50%);
+    opacity: 0.7;
     transform: translateY(-2px);
   }
 }

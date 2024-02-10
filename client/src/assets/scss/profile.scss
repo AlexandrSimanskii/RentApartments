@@ -16,7 +16,8 @@
   }
   &-img {
     border-radius: 50%;
-    max-width: 10rem;
+    width: 10rem;
+    height: 10rem;
     object-fit: cover;
   }
   &-form {
@@ -63,7 +64,7 @@
   width: 100%;
 }
 .error {
-  color: rgb(73,150,232);
+  color: rgb(73, 150, 232);
   font-size: 20px;
   font-weight: 500;
 }

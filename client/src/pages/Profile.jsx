@@ -207,7 +207,7 @@ const Profile = () => {
           </span>
         </div>
 
-        <p>{error ? error : ""}</p>
+        <p className="error">{error ? error : ""}</p>
         <p>{updateSuccess ? "Данные изменены" : ""}</p>
       </div>
     </div>
