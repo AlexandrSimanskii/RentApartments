@@ -27,10 +27,12 @@ const Profile = () => {
   const [errorFileApload, setErrorFileUpload] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [errorShowListings, setErrorShowListings] = useState(false);
+  const [listings, setListings] = useState([]);
   const { currentUser, loading, error } = useSelector((state) => state.user);
+
   const fileRef = useRef(null);
   const dispatch = useDispatch();
-  console.log(currentUser._id);
 
   useEffect(() => {
     if (file) {
@@ -84,7 +86,7 @@ const Profile = () => {
 
       if (data.success === false) {
         dispatch(updateUserFailure(data.message));
-        console.log(data.message);
+
         return;
       }
 
@@ -129,6 +131,21 @@ const Profile = () => {
     }
   };
 
+  const handlerShowListing = async () => {
+    try {
+      setErrorShowListings(false);
+      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const data = await res.json();
+
+      if (res.status === false) {
+        return setErrorShowListings(res.message);
+      }
+      setListings(data);
+    } catch (error) {
+      setErrorShowListings(error.message);
+    }
+  };
+  console.log(listings);
   // firebase storage
   // allow read;
   // allow write: if
@@ -190,7 +207,9 @@ const Profile = () => {
             placeholder="Пароль"
             onChange={handleChenge}
           />
-          <button className="profile-btn" type="submit">{loading ? "Загрузка..." : "Изменить"}</button>
+          <button className="profile-btn" type="submit">
+            {loading ? "Загрузка..." : "Изменить"}
+          </button>
         </form>
         <Link className="link" to={"/listing"}>
           <button className="add-listing" type="button">
@@ -209,6 +228,29 @@ const Profile = () => {
 
         <p className="error">{error ? error : ""}</p>
         <p>{updateSuccess ? "Данные изменены" : ""}</p>
+        <button onClick={handlerShowListing} className="listing-show-btn">
+          Показать мои обьявления
+        </button>
+        <p> {errorShowListings ? "Ошибка при получении обьявлений" : ""}</p>
+        <div className="listing-cards">
+          {listings.length !== 0 &&
+            listings.map((item) => (
+              <div key={item._id} className="listing-card">
+                <Link to={`/listing/${item._id}`}>
+                  <img
+                    className="listing-card__image"
+                    src={item.imageUrls[0]}
+                    alt="listing image"
+                  />
+                </Link>
+                <p>{item.name}</p>
+                <div className="listing-buttons">
+                  <button className="listing-buttons__edit">Изменить</button>
+                  <button className="listing-buttons__delete">удалить</button>
+                </div>
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );

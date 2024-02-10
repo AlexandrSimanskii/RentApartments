@@ -22,6 +22,11 @@
     column-gap: 5px;
     align-items: center;
   }
+  &-show-btn {
+    background-color: transparent;
+    color: $form-color;
+    font-size: 2rem;
+  }
 }
 .group {
   &-text {
@@ -93,7 +98,32 @@
     text-transform: uppercase;
     color: $form-color;
     background-color: transparent;
-    
-    
+  }
+}
+.listing {
+  &-cards {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+  }
+  &-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__image {
+      width: 5rem;
+      height: 5rem;
+      object-fit: contain;
+    }
+  }
+  &-buttons {
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    &__delete {
+      background-color: red;
+    }
   }
 }

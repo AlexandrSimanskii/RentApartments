@@ -128,6 +128,7 @@ const CreateListing = () => {
       setLoading(true);
       setError(false);
       if (formData.imageUrls.length < 1) {
+        setLoading(false)
         return setError("Вы должны загрузить фотографию!");
       }
       if (formData.regularPrice < formData.discountPrice) {
