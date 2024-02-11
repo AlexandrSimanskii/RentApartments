@@ -160,7 +160,7 @@ const Profile = () => {
     }
   };
 
-  console.log(listings);
+  
   // firebase storage
   // allow read;
   // allow write: if
@@ -226,7 +226,7 @@ const Profile = () => {
             {loading ? "Загрузка..." : "Изменить"}
           </button>
         </form>
-        <Link className="link" to={"/listing"}>
+        <Link className="link" to={"/listing/create"}>
           <button className="add-listing" type="button">
             Добавить обьявление
           </button>
@@ -262,7 +262,10 @@ const Profile = () => {
                 </Link>
                 <p>{item.name}</p>
                 <div className="listing-buttons">
-                  <button className="listing-buttons__edit">Изменить</button>
+                  <Link to={`/listing/update/${item._id}`}>
+                    <button className="listing-buttons__edit">Изменить</button>
+                  </Link>
+
                   <button
                     onClick={() => handlerListingDelete(item._id)}
                     className="listing-buttons__delete"
