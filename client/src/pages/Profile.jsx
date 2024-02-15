@@ -145,6 +145,7 @@ const Profile = () => {
       setErrorShowListings(error.message);
     }
   };
+  console.log(listings);
   const handlerListingDelete = async (listingID) => {
     try {
       const res = await fetch(`/api/listing/delete/${listingID}`, {
@@ -160,7 +161,6 @@ const Profile = () => {
     }
   };
 
-  
   // firebase storage
   // allow read;
   // allow write: if

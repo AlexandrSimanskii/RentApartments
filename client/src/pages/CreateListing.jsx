@@ -128,7 +128,7 @@ const CreateListing = () => {
       setLoading(true);
       setError(false);
       if (formData.imageUrls.length < 1) {
-        setLoading(false)
+        setLoading(false);
         return setError("Вы должны загрузить фотографию!");
       }
       if (formData.regularPrice < formData.discountPrice) {
@@ -156,202 +156,209 @@ const CreateListing = () => {
     }
   };
 
-  console.log(formData);
   return (
-    <section className="listing container">
-      <h1 className="listing-title">Создать обьявление</h1>
-      <form onSubmit={handleSubmit} className="listing-form" action="submit">
-        <div className="listing-form__inner">
-          <div className="add-data">
-            <fieldset className="group-text">
-              <input
-                type="text"
-                id="name"
-                required
-                placeholder="Вид недвижемости"
-                onChange={handleChange}
-                value={formData.name}
-              />
-              <textarea
-                id="description"
-                required
-                placeholder="Описание"
-                onChange={handleChange}
-                value={formData.description}
-              ></textarea>
-              <input
-                type="text"
-                id="address"
-                required
-                placeholder="Адресс"
-                onChange={handleChange}
-                value={formData.address}
-              />
-            </fieldset>
-            <fieldset className="group-checkbox">
-              <label className="listing-label">
-                <input
-                  type="checkbox"
-                  id="Продажа"
-                  onChange={handleChange}
-                  checked={formData.type === "Продажа"}
-                />
-                Продажа
-              </label>
-
-              <label className="listing-label">
-                <input
-                  type="checkbox"
-                  id="Аренда"
-                  onChange={handleChange}
-                  checked={formData.type === "Аренда"}
-                />
-                Аренда
-              </label>
-              <label className="listing-label">
-                <input
-                  type="checkbox"
-                  id="parking"
-                  onChange={handleChange}
-                  checked={formData.parking}
-                />
-                Парковка
-              </label>
-              <label className="listing-label">
-                <input
-                  type="checkbox"
-                  id="furnished"
-                  onChange={handleChange}
-                  checked={formData.furnished}
-                />
-                Мебель
-              </label>
-              <label className="listing-label">
-                <input
-                  type="checkbox"
-                  id="offer"
-                  onChange={handleChange}
-                  checked={formData.offer}
-                />
-                Заключение договора
-              </label>
-            </fieldset>
-            <fieldset className="group-number">
-              <label className="listing-label">
-                <input
-                  className="group-number__item"
-                  id="bedrooms"
-                  type="number"
-                  required
-                  min="1"
-                  max="10"
-                  onChange={handleChange}
-                  value={formData.bedrooms}
-                />
-                Комнаты
-              </label>
-              <label className="listing-label">
-                <input
-                  className="group-number__item"
-                  id="bathrooms"
-                  type="number"
-                  required
-                  min="1"
-                  max="10"
-                  onChange={handleChange}
-                  value={formData.bathrooms}
-                />
-                Ванные
-              </label>
-              <label className="listing-label">
-                <input
-                  className="group-number__item"
-                  id="regularPrice"
-                  type="number"
-                  required
-                  min="500"
-                  max="100000000"
-                  onChange={handleChange}
-                  value={formData.regularPrice}
-                />
-                <p className="group-number__item-text">
-                  Цена <span>(Руб/месяц)</span>
-                </p>
-              </label>
-              {formData.offer && (
-                <label className="listing-label">
+    <section className="create-listing ">
+      <div className="container">
+        <div className="create-listing__inner">
+          <h1 className="create-listing-title">Создать обьявление</h1>
+          <form
+            onSubmit={handleSubmit}
+            className="create-listing-form"
+            action="submit"
+          >
+            <div className="create-listing-form__inner">
+              <div className="add-data">
+                <fieldset className="group-text">
                   <input
-                    className="group-number__item"
-                    id="discountPrice"
-                    type="number"
+                    type="text"
+                    id="name"
                     required
-                    min="0"
-                    max="100000000"
+                    placeholder="Вид недвижемости"
                     onChange={handleChange}
-                    value={formData.discountPrice}
+                    value={formData.name}
                   />
-                  <p className="group-number__item-text">
-                    Цена со скидкой <span>(Руб/месяц)</span>
-                  </p>
-                </label>
-              )}
-            </fieldset>
-          </div>
-          <div className="add-pictures">
-            <p className="add-pictures__title">
-              Фотографии:
-              <span className="add-pictures__title-inner">
-                Первая фотография будет главной!(Не более 6 шт.)
-              </span>
-            </p>
-            <div className="add-pictures-group">
-              <input
-                onChange={(e) => {
-                  setFiles(e.target.files);
-                }}
-                type="file"
-                id="images"
-                accept="image/*"
-                multiple
-              />
-              <button
-                onClick={handleFileSubmit}
-                className="upload-picture"
-                type="button"
-                disabled={uploading}
-              >
-                {uploading ? "Загрузка..." : "Загрузить"}
-              </button>
-            </div>
+                  <textarea
+                    id="description"
+                    required
+                    placeholder="Описание"
+                    onChange={handleChange}
+                    value={formData.description}
+                  ></textarea>
+                  <input
+                    type="text"
+                    id="address"
+                    required
+                    placeholder="Адресс"
+                    onChange={handleChange}
+                    value={formData.address}
+                  />
+                </fieldset>
+                <fieldset className="group-checkbox">
+                  <label className="create-listing-label">
+                    <input
+                      type="checkbox"
+                      id="Продажа"
+                      onChange={handleChange}
+                      checked={formData.type === "Продажа"}
+                    />
+                    Продажа
+                  </label>
 
-            {formData.imageUrls.map((url, index) => (
-              <div className="create-listing-card" key={url}>
-                <img
-                  className="create-listing-card__img"
-                  src={url}
-                  alt="listing image"
-                />
-                <button
-                  className="create-listing-card__btn"
-                  onClick={() => handleRemoveImage(index)}
-                  type="button"
-                >
-                  Удалить
-                </button>
+                  <label className="create-listing-label">
+                    <input
+                      type="checkbox"
+                      id="Аренда"
+                      onChange={handleChange}
+                      checked={formData.type === "Аренда"}
+                    />
+                    Аренда
+                  </label>
+                  <label className="create-listing-label">
+                    <input
+                      type="checkbox"
+                      id="parking"
+                      onChange={handleChange}
+                      checked={formData.parking}
+                    />
+                    Парковка
+                  </label>
+                  <label className="create-listing-label">
+                    <input
+                      type="checkbox"
+                      id="furnished"
+                      onChange={handleChange}
+                      checked={formData.furnished}
+                    />
+                    Мебель
+                  </label>
+                  <label className="create-listing-label">
+                    <input
+                      type="checkbox"
+                      id="offer"
+                      onChange={handleChange}
+                      checked={formData.offer}
+                    />
+                    Заключение договора
+                  </label>
+                </fieldset>
+                <fieldset className="group-number">
+                  <label className="create-listing-label">
+                    <input
+                      className="group-number__item"
+                      id="bedrooms"
+                      type="number"
+                      required
+                      min="1"
+                      max="40"
+                      onChange={handleChange}
+                      value={formData.bedrooms}
+                    />
+                    Комнаты
+                  </label>
+                  <label className="create-listing-label">
+                    <input
+                      className="group-number__item"
+                      id="bathrooms"
+                      type="number"
+                      required
+                      min="1"
+                      max="10"
+                      onChange={handleChange}
+                      value={formData.bathrooms}
+                    />
+                    Ванные
+                  </label>
+                  <label className="create-listing-label">
+                    <input
+                      className="group-number__item"
+                      id="regularPrice"
+                      type="number"
+                      required
+                      min="500"
+                      max="100000000"
+                      onChange={handleChange}
+                      value={formData.regularPrice}
+                    />
+                    <p className="group-number__item-text">
+                      Цена <span>(Руб/месяц)</span>
+                    </p>
+                  </label>
+                  {formData.offer && (
+                    <label className="create-listing-label">
+                      <input
+                        className="group-number__item"
+                        id="discountPrice"
+                        type="number"
+                        required
+                        min="0"
+                        max="100000000"
+                        onChange={handleChange}
+                        value={formData.discountPrice}
+                      />
+                      <p className="group-number__item-text">
+                        Цена со скидкой <span>(Руб/месяц)</span>
+                      </p>
+                    </label>
+                  )}
+                </fieldset>
               </div>
-            ))}
+              <div className="add-pictures">
+                <p className="add-pictures__title">
+                  Фотографии:
+                  <span className="add-pictures__title-inner">
+                    Первая фотография будет главной!(Не более 6 шт.)
+                  </span>
+                </p>
+                <div className="add-pictures-group">
+                  <input
+                    onChange={(e) => {
+                      setFiles(e.target.files);
+                    }}
+                    type="file"
+                    id="images"
+                    accept="image/*"
+                    multiple
+                  />
+                  <button
+                    onClick={handleFileSubmit}
+                    className="upload-picture"
+                    type="button"
+                    disabled={uploading}
+                  >
+                    {uploading ? "Загрузка..." : "Загрузить"}
+                  </button>
+                </div>
 
-            <p className="error">{imageUploadError && imageUploadError}</p>
-            <button
-              className="listing-form__button"
-              disabled={loading || uploading}
-            >
-              {loading ? "Загрузка..." : "Добавить обьявление"}
-            </button>
-            {error && <p className="error">{error}</p>}
-          </div>
+                {formData.imageUrls.map((url, index) => (
+                  <div className="create-listing-card" key={url}>
+                    <img
+                      className="create-listing-card__img"
+                      src={url}
+                      alt="listing image"
+                    />
+                    <button
+                      className="create-listing-card__btn"
+                      onClick={() => handleRemoveImage(index)}
+                      type="button"
+                    >
+                      Удалить
+                    </button>
+                  </div>
+                ))}
+
+                <p className="error">{imageUploadError && imageUploadError}</p>
+                <button
+                  className="listing-form__button"
+                  disabled={loading || uploading}
+                >
+                  {loading ? "Загрузка..." : "Добавить обьявление"}
+                </button>
+                {error && <p className="error">{error}</p>}
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </section>
   );
 };

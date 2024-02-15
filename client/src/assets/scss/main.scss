@@ -68,16 +68,9 @@ textarea {
 fieldset {
   border: none;
 }
-.swiper-images {
 
-  height: 550px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center
-
- 
-}
 @import "header";
 @import "signUp";
 @import "profile";
 @import "listing";
+@import "createListing";

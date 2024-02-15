@@ -1,103 +1,90 @@
 .listing {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 3rem;
-
-  &-title {
-    margin-bottom: 5rem;
-  }
-  &-form {
-    width: 100%;
-    &__button {
-      background-color: $btn-color;
-    }
-    &__inner {
-      display: flex;
-      column-gap: 3rem;
-    }
-  }
-  &-label {
-    display: flex;
-    column-gap: 5px;
-    align-items: center;
-  }
-  &-show-btn {
-    background-color: transparent;
-    color: $form-color;
-    font-size: 2rem;
-  }
-}
-.group {
-  &-text {
+  &-inner {
+    padding: 3rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
   }
-  &-checkbox {
-    display: flex;
-    align-items: center;
-    column-gap: 20px;
-    flex-wrap: wrap;
+  &-title {
+    font-size: 4.4rem;
+    text-align: center;
+    margin-top: 2rem;
   }
-  &-number {
+  &-price {
+    font-size: 3.6rem;
+    font-weight: 600;
+    margin-bottom: 1.6rem;
+  }
+  &-swiper {
+    margin-bottom: 2rem;
+    width: 100vw;
+  }
+  &-address {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
     display: flex;
-    flex-wrap: wrap;
+    gap: 5px;
+    font-weight: 600;
+    color: rgb(87, 87, 86);
+    &__marker {
+      color: $form-color;
+    }
+  }
+  &-group-buttons {
+    display: flex;
     gap: 20px;
-    &__item {
-      &-text {
-        display: flex;
-        flex-direction: column;
-      }
+    margin-bottom: 2rem;
+    &__rent {
+      background-color: rgb(131, 30, 30);
+    }
+    &__sale {
+      background-color: darken($form-color, 15);
     }
   }
-}
-.add-data {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 2rem;
-}
-.add-pictures {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  &__title {
-    font-size: 2.4rem;
-    font-weight: 700;
-    &-inner {
-      font-size: 2rem;
-      font-weight: 200;
-    }
+  &__descriptions {
+    margin-bottom: 2rem;
   }
-  &-group {
+  &-options {
+    color: darken($form-color, 15);
     display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    &__li {
+      align-items: center;
+      display: flex;
+      column-gap: 6px;
+    }
+  }
 
-    justify-content: space-between;
-    gap: 3rem;
+  &-share {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: antiquewhite;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    font-size: 2rem;
+  }
+  &__contact-btn {
+    align-self: center;
+    margin: 3rem;
+    background-color: darken($form-color, 15);
   }
 }
-.upload-picture {
-  background-color: transparent;
-  color: $form-color;
-  border: 2px solid $form-color;
-  max-width: 25%;
+
+.swiper-images {
+  height: 500px;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
-.create-listing-card {
-  display: flex;
-  padding: 5px;
-  justify-content: space-between;
-  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.1);
-  &__img {
-    width: 70px;
-    height: 60px;
-    object-fit: contain;
-  }
-  &__btn {
-    text-transform: uppercase;
-    color: $form-color;
-    background-color: transparent;
-    
+@media (max-width: 500px) {
+  .listing-price {
+    font-size: 2rem;
   }
 }
