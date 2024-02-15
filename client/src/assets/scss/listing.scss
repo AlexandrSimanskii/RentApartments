@@ -48,6 +48,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
+    margin-bottom: 2rem;
     &__li {
       align-items: center;
       display: flex;
@@ -71,8 +72,10 @@
   }
   &__contact-btn {
     align-self: center;
+
     margin: 3rem;
     background-color: darken($form-color, 15);
+    padding: 5px 16px;
   }
 }
 

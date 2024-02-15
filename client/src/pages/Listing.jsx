@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { useSelector } from "react-redux";
 import { register } from "swiper/element/bundle";
 import {
   FaMapMarkerAlt,
@@ -10,14 +10,17 @@ import {
   FaBath,
   FaParking,
 } from "react-icons/fa";
+import Contact from "../components/Contact";
 
 register();
 
 const Listing = () => {
   const [listing, setListing] = useState(null);
+  const [contact, setContact] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const params = useParams();
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -143,9 +146,18 @@ const Listing = () => {
                   <span>{listing.furnished ? "Мебель" : "Без мебели"}</span>
                 </li>
               </ul>
-              <button className="listing__contact-btn">
-                Контакты владельца
-              </button>
+
+              {contact && <Contact listing={listing} />}
+              {currentUser &&
+                currentUser._id !== listing.userRef &&
+                !contact && (
+                  <button
+                    onClick={() => setContact(true)}
+                    className="listing__contact-btn"
+                  >
+                    Контакты владельца
+                  </button>
+                )}
             </div>
           </div>
         </>

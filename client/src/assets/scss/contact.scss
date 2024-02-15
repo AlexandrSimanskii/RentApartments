@@ -1,0 +1,15 @@
+.contact {
+  box-shadow: -2px 0px 5px 0px rgba(34, 60, 80, 0.24);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  &-title {
+    margin-bottom: 16px;
+    &__inner {
+      font-weight: 700;
+    }
+  }
+  &-textarea {
+    margin-bottom: 2rem;
+  }
+}

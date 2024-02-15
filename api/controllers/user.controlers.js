@@ -55,13 +55,25 @@ export const getUserListing = async (req, res, next) => {
   if (req.user.id === req.params.id) {
     console.log(req);
     const listing = await Listing.find({ userRef: req.params.id });
-    res.status(200).json(listing)
-
-
+    res.status(200).json(listing);
   } else {
     return next(
       errorHandler(401, "Вы можете посмотреть только свои обьявления!")
     );
   }
 };
- 
+
+export const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      next(errorHandler(402, "Такой пользователь не сущестует!"));
+    }
+
+    const { password, ...rest } = user._doc;
+
+    res.status(200).json(rest);
+  } catch (error) {
+    next(error);
+  }
+};
