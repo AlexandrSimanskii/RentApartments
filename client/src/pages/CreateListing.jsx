@@ -132,6 +132,7 @@ const CreateListing = () => {
         return setError("Вы должны загрузить фотографию!");
       }
       if (formData.regularPrice < formData.discountPrice) {
+        setLoading(false)
         return setError("Цена со скидкой не может быть больше цены!");
       }
 
