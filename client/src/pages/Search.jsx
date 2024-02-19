@@ -1,4 +1,3 @@
-import { json } from "body-parser";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -26,6 +25,7 @@ const Search = () => {
     const paramsOffer = urlParams.get("offer");
     const paramsSort = urlParams.get("sort");
     const paramsOrder = urlParams.get("order");
+    const pathQuery = urlParams.toString();
 
     if (
       paramsSearchTerm ||
@@ -50,15 +50,15 @@ const Search = () => {
     const fetchGetListings = async () => {
       setLoading(true);
 
-      const res = await fetch.get(`/api/listings/get?${sidebardata}`);
-      const data = await json(res);
-
+      const res = await fetch(`api/listing/get?${pathQuery}`);
+      const data = await res.json();
+      setLoading(false);
       setListings(data);
     };
     fetchGetListings();
   }, [location.search]);
 
-  console.log(listings);
+ console.log(listings);
 
   const handleChange = (e) => {
     if (
@@ -107,7 +107,7 @@ const Search = () => {
 
     navigate(`?${searchQuery}`);
   };
-  console.log(location);
+
   return (
     <section className="search">
       <div className="container">

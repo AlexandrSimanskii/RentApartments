@@ -70,8 +70,8 @@ export const getListing = async (req, res, next) => {
 };
 
 export const getListings = async (req, res, next) => {
-  
   try {
+    console.log(req.query);
     const limit = parseInt(req.query.limit) || 10;
 
     const startIndex = parseInt(req.query.startIndex) || 0;
@@ -95,7 +95,7 @@ export const getListings = async (req, res, next) => {
 
     let type = req.query.type;
 
-    if (type === undefined || type === "all") {
+    if (type === undefined || type === "Все") {
       type = { $in: ["Продажа", "Аренда"] };
     }
 
@@ -108,9 +108,9 @@ export const getListings = async (req, res, next) => {
     const listings = await Listing.find({
       name: { $regex: searchTerm, $options: "i" },
       offer,
-      furnished,
       parking,
       type,
+      furnished,
     })
       .sort({ [sort]: order })
       .limit(limit)
