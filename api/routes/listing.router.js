@@ -2,7 +2,7 @@ import express from "express";
 import {
   createListing,
   deleteListing,
-  updateListing,
+  updateListing, 
   getListing,
   getListings
 } from "../controllers/listing.controller.js";

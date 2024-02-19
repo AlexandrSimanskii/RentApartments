@@ -17,7 +17,7 @@ const Header = () => {
     urlParams.set("searchTerm", searchTerm);
 
     const searchQuery = urlParams.toString();
-    const paramsIterator = urlParams.entries();
+    // const paramsIterator = urlParams.entries();
 
     navigate(`/search?${searchQuery}`);
   };
@@ -29,6 +29,8 @@ const Header = () => {
       setSearchTerm(searchTermFromUrl);
     }
   }, [location.search]);
+
+
 
   return (
     <header className="header">
