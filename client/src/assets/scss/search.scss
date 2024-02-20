@@ -19,6 +19,18 @@
       gap: 16px;
     }
   }
+  &-result {
+    &__title {
+      margin-bottom: 2rem;
+    
+    }
+    &__inner {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+  }
 }
 .form-group-name {
   font-weight: 600;

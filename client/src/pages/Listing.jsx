@@ -11,6 +11,8 @@ import {
   FaParking,
 } from "react-icons/fa";
 import Contact from "../components/Contact";
+import { getBathroomLabel } from "../utils/getBathroomLabel";
+import { getRoomLabel } from "../utils/getRoomLabel";
 
 register();
 
@@ -48,32 +50,6 @@ const Listing = () => {
     };
     fetchListing();
   }, [params.listingID]);
-
-  const getRoomLabel = (number) => {
-    if (number === 1 || number === 21 || number === 31) {
-      return "комната";
-    } else if (
-      (number >= 2 && number <= 4) ||
-      (number >= 22 && number <= 24) ||
-      (number >= 32 && number <= 34)
-    ) {
-      return "комнаты";
-    } else {
-      return "комнат";
-    }
-  };
-
-  function getBathroomLabel(number) {
-    if (number === 1) {
-      return "ванная комната";
-    } else if (number >= 2 && number <= 4) {
-      return "ванные комнаты";
-    } else if (number >= 5 && number <= 10) {
-      return "ванных комнат";
-    } else {
-      return "ванных комнат"; // Для остальных случаев можно использовать тот же вариант
-    }
-  }
 
   return (
     <main className="listing ">

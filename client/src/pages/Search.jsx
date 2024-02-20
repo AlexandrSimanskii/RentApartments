@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Listingitem from "../components/Listingitem";
 
 const Search = () => {
   const [loading, setLoading] = useState(false);
@@ -58,7 +59,7 @@ const Search = () => {
     fetchGetListings();
   }, [location.search]);
 
- console.log(listings);
+  console.log(listings);
 
   const handleChange = (e) => {
     if (
@@ -191,16 +192,28 @@ const Search = () => {
                 defaultValue={"created__at__desc"}
                 id="sort__order"
               >
-                <option value="regularPrice_desc">По возрастанию цены</option>
-                <option value="regularPrice_asc">По убыванию цены</option>
-                <option value="createdAt_desc">Сначала свежие</option>
                 <option value="createdAt_asc">По умолчанию</option>
+                <option value="regularPrice_desc">По убыванию цены</option>
+                <option value="regularPrice_asc">По возрастанию цены</option>
+                <option value="createdAt_desc">Сначала свежие</option>
               </select>
             </div>
             <button>Показать</button>
           </form>
           <div className="search-result">
-            <h2>Результаты поиска:</h2>
+            <h2 className="search-result__title"> Результаты поиска:</h2>
+
+            <div className="search-result__inner">
+              {!loading && listings.length === 0 && (
+                <p>Объявлений с такими параметрамии не найдено</p>
+              )}
+              {loading && <p>Загрузка...</p>}
+
+              {listings.length > 0 &&
+                listings.map((listing) => (
+                  <Listingitem key={listing._id} listing={listing} />
+                ))}
+            </div>
           </div>
         </div>
       </div>
