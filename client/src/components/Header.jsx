@@ -30,17 +30,12 @@ const Header = () => {
     }
   }, [location.search]);
 
-
-
   return (
     <header className="header">
       <div className="container">
         <div className="header-inner">
           <Link to={"/"}>
-            <h1 className="header-title">
-              <span className="header-title__first">Sahand</span>
-              <span className="header-title__second">Estate</span>
-            </h1>
+            <h1 className="header-title">Estate</h1>
           </Link>
 
           <form className="header-form" onSubmit={handleSubmit}>
