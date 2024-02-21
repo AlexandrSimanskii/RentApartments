@@ -1,6 +1,4 @@
 .home {
-  &-inner {
-  }
   &-top {
     padding: 48px 0;
     max-width: 600px;
@@ -26,6 +24,7 @@
       font-weight: 600;
     }
   }
+
   &-swiper__img {
     height: 400px;
     background-position: center;
@@ -33,6 +32,7 @@
     background-size: cover;
   }
   &-groups {
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     row-gap: 3rem;

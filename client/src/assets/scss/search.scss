@@ -50,5 +50,10 @@
     &-inner {
       flex-direction: column;
     }
+    &-result__inner {
+      justify-content: space-around;
+    }
   }
+}
+@media (max-width: 500px) {
 }

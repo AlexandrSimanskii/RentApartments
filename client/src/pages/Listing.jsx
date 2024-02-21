@@ -1,7 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { register } from "swiper/element/bundle";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import SwiperCore from "swiper";
+import "swiper/css/bundle";
 import {
   FaMapMarkerAlt,
   FaShare,
@@ -14,9 +17,8 @@ import Contact from "../components/Contact";
 import { getBathroomLabel } from "../utils/getBathroomLabel";
 import { getRoomLabel } from "../utils/getRoomLabel";
 
-register();
-
 const Listing = () => {
+  SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
   const [contact, setContact] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -59,16 +61,16 @@ const Listing = () => {
       {listing && !loading && !error && (
         <>
           <div className="listing-swiper">
-            <swiper-container navigation="true" loop="true">
+            <Swiper navigation>
               {listing.imageUrls.map((url) => (
-                <swiper-slide key={url}>
+                <SwiperSlide key={url}>
                   <div
                     className="swiper-images"
                     style={{ backgroundImage: `url(${url})` }}
                   ></div>
-                </swiper-slide>
+                </SwiperSlide>
               ))}
-            </swiper-container>
+            </Swiper>
           </div>
           <div className="container">
             <div className="listing-inner">
