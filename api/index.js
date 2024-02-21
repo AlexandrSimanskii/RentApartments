@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import userRouter from "./routes/user.router.js";
 import authRouter from "./routes/auth.router.js";
 import listingRouter from "./routes/listing.router.js";
+import path from "path";
 
 dotenv.config();
 
@@ -14,6 +15,8 @@ mongoose
     console.log("Connect with MongoDB");
   })
   .catch((err) => console.log("Не удалось подключиться к MongoDB", err));
+
+const __dirname = path.resolve();
 
 const api = express();
 
@@ -26,6 +29,12 @@ api.use(express.json());
 api.use("/api", authRouter);
 api.use("/api/user", userRouter);
 api.use("/api/listing", listingRouter);
+
+api.use(express.static(path.join(__dirname, "/client/dist")));
+api.get("*", (req, res) => {
+  res.sendFile(path.json(__dirname, "client", "dist", "index.html"));
+});
+
 api.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
