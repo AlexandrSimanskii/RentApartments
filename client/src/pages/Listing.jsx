@@ -23,6 +23,7 @@ const Listing = () => {
   const [contact, setContact] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [copied, setCopied] = useState(false);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
@@ -74,10 +75,6 @@ const Listing = () => {
           </div>
           <div className="container">
             <div className="listing-inner">
-              <div className="listing-share">
-                <FaShare />
-              </div>
-
               <p className="listing-price">
                 {listing.name}-
                 <span>
@@ -92,11 +89,16 @@ const Listing = () => {
               </div>
               <div className="listing-group-buttons">
                 <button className="listing-group-buttons__rent">
-                  {listing.type}
+                  {listing.type} {listing.regularPrice.toLocaleString("en-US")}{" "}
+                  Pуб.
                 </button>
                 {listing.offer && (
                   <button className="listing-group-buttons__sale">
-                    Получить скидку
+                    {listing.type === "Аренда"
+                      ? `Скидка ${
+                          listing.regularPrice - listing.discountPrice
+                        }/месяц`
+                      : `Co скидкой ${listing.discountPrice.toLocaleString("en-US")} руб.`}
                   </button>
                 )}
               </div>
