@@ -4,7 +4,7 @@ import { getBathroomLabel } from "../utils/getBathroomLabel";
 import { getRoomLabel } from "../utils/getRoomLabel";
 
 const Listingitem = ({ listing }) => {
-  console.log(listing);
+ 
   return (
     <div className="listingitem">
       <Link className="listingitem-link" to={`/listing/${listing._id}`}>

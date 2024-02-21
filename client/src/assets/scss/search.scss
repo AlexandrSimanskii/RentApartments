@@ -1,5 +1,5 @@
 .search {
-  margin-top: 30px;
+  margin: 30px 0;
   &-inner {
     display: flex;
     gap: 40px;
@@ -22,14 +22,22 @@
   &-result {
     &__title {
       margin-bottom: 2rem;
-    
     }
     &__inner {
       display: flex;
-      justify-content: space-around;
+      
       flex-wrap: wrap;
       gap: 2rem;
+      margin-bottom: 2rem;
     }
+  }
+  &-showmore {
+    background-color: transparent;
+    color: $form-color;
+    font-size: medium;
+    font-weight: 700;
+    text-align: center;
+    
   }
 }
 .form-group-name {

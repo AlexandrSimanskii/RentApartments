@@ -4,7 +4,9 @@ import Listingitem from "../components/Listingitem";
 
 const Search = () => {
   const [loading, setLoading] = useState(false);
-  const [listings, setListings] = useState({});
+  const [listings, setListings] = useState([]);
+  const [showMore, setShowMore] = useState(false);
+
   const [sidebardata, setSidebardata] = useState({
     searchTerm: "",
     type: "Все",
@@ -53,13 +55,18 @@ const Search = () => {
 
       const res = await fetch(`api/listing/get?${pathQuery}`);
       const data = await res.json();
+
+      if (data.length > 5) {
+        setShowMore(true);
+      } else {
+        setShowMore(false);
+      }
+
       setLoading(false);
       setListings(data);
     };
     fetchGetListings();
   }, [location.search]);
-
-  console.log(listings);
 
   const handleChange = (e) => {
     if (
@@ -107,6 +114,27 @@ const Search = () => {
     const searchQuery = urlSearchParams.toString();
 
     navigate(`?${searchQuery}`);
+  };
+
+  const handleShowMore = async () => {
+   
+    try {
+      const startIndex = listings.length;
+      const searchParams = new URLSearchParams(location.search);
+      searchParams.set("startIndex", startIndex);
+      const searchQuery = searchParams.toString();
+
+      const res = await fetch(`api/listing/get?${searchQuery}`);
+      const data = await res.json();
+      if (data.length > 5) {
+        setShowMore(true);
+      } else {
+        setShowMore(false);
+      }
+      setListings([...listings, ...data]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -214,6 +242,16 @@ const Search = () => {
                   <Listingitem key={listing._id} listing={listing} />
                 ))}
             </div>
+
+            {showMore && (
+              <button
+                type="button"
+                className="search-showmore"
+                onClick={handleShowMore}
+              >
+                Показать еще...
+              </button>
+            )}
           </div>
         </div>
       </div>
